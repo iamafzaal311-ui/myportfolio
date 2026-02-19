@@ -113,3 +113,47 @@ footer { padding: 40px; text-align: center; color: #666; }
     .grid-container { grid-template-columns: 1fr; }
     .hero-content h1 { font-size: 2.5rem; }
 }
+/* --- Ultra Responsive Media Queries --- */
+
+@media (max-width: 992px) {
+    .hero-content h1 { font-size: 3.5rem; }
+    .project-grid { grid-template-columns: 1fr; } /* Desktop par 2 cards, tablet par 1 */
+}
+
+@media (max-width: 768px) {
+    nav { 
+        padding: 15px 5%; 
+        border-radius: 20px; 
+        top: 10px; 
+    }
+    
+    nav ul { display: none; } /* Mobile menu simple rakhne ke liye filhal hide */
+
+    .hero { 
+        flex-direction: column; 
+        text-align: center; 
+        padding-top: 140px; 
+        height: auto; 
+    }
+
+    .hero-content h1 { font-size: 2.8rem; letter-spacing: -1px; }
+    
+    .hero-content p { font-size: 1rem; margin: 0 auto; }
+
+    .hero-btns {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .secondary { margin-left: 0; width: 100%; }
+    .primary { width: 100%; }
+
+    .profile-card img { width: 150px; height: 150px; }
+
+    .contact-box { padding: 40px 20px; border-radius: 30px; }
+    
+    .social-links { gap: 10px; }
+    .social-links a { width: 100%; text-align: center; }
+}
