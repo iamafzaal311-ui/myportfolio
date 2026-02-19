@@ -5,7 +5,7 @@
     --glass: rgba(255, 255, 255, 0.05);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; scroll-behavior: smooth; }
 
 body {
     background-color: var(--dark-bg);
@@ -27,37 +27,52 @@ body {
 .blob { top: -100px; left: -100px; }
 .blob2 { bottom: -100px; right: -100px; }
 
-/* Navbar */
+/* --- Navbar (Sticky Fix) --- */
 nav {
     display: flex;
     justify-content: space-between;
-    padding: 25px 8%;
-    position: fixed;
+    align-items: center;
+    padding: 20px 8%;
+    position: sticky; /* Sticky works better for modern glass effect */
+    top: 0;
     width: 100%;
     backdrop-filter: blur(15px);
-    z-index: 100;
+    background: rgba(11, 14, 20, 0.8);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    z-index: 1000;
 }
-.logo { font-size: 1.8rem; font-weight: 800; }
-.logo span { color: var(--main-blue); }
-nav ul { display: flex; list-style: none; gap: 30px; }
-nav ul li a { color: white; text-decoration: none; font-weight: 500; }
 
-/* Hero */
+.logo { font-size: 1.8rem; font-weight: 800; text-decoration: none; color: white; }
+.logo span { color: var(--main-blue); }
+
+nav ul { display: flex; list-style: none; gap: 30px; }
+nav ul li a { color: white; text-decoration: none; font-weight: 500; transition: 0.3s; font-size: 0.95rem; }
+nav ul li a:hover { color: var(--main-blue); }
+
+/* --- Hero Section --- */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     padding: 0 10%;
     gap: 50px;
 }
-.badge { background: rgba(0, 210, 255, 0.1); color: var(--main-blue); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; }
-.hero-content h1 { font-size: 4rem; margin: 15px 0; }
-.hero-content h1 span { background: linear-gradient(to right, #00d2ff, #928dab); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.btn { padding: 12px 30px; border-radius: 10px; text-decoration: none; display: inline-block; transition: 0.3s; margin-top: 20px;}
-.primary { background: var(--main-blue); color: black; font-weight: bold; }
-.secondary { border: 1px solid white; color: white; margin-left: 15px; }
 
-/* Profile Card */
+.hero-content { flex: 1; }
+.hero-content h1 { font-size: 4rem; margin: 15px 0; line-height: 1.1; }
+.hero-content h1 span { background: linear-gradient(to right, #00d2ff, #928dab); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-content p { font-size: 1.1rem; color: #ccc; margin-bottom: 25px; max-width: 500px; }
+
+.badge { background: rgba(0, 210, 255, 0.1); color: var(--main-blue); padding: 6px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+
+.btn { padding: 12px 30px; border-radius: 10px; text-decoration: none; display: inline-block; transition: 0.3s; margin-top: 20px; font-weight: bold; }
+.primary { background: var(--main-blue); color: black; }
+.secondary { border: 1px solid white; color: white; margin-left: 15px; }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3); }
+
+/* --- Profile Card with Available Tag Fix --- */
+.hero-img-container { flex: 0.8; display: flex; justify-content: center; }
+
 .profile-card {
     background: var(--glass);
     padding: 30px;
@@ -65,11 +80,21 @@ nav ul li a { color: white; text-decoration: none; font-weight: 500; }
     border: 1px solid rgba(255,255,255,0.1);
     text-align: center;
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 350px;
 }
-.profile-card img { width: 200px; height: 200px; border-radius: 50%; border: 5px solid var(--main-blue); margin-bottom: 20px; }
 
-/* Education/Certs Glass Cards */
-.edu-cert { padding: 100px 10%; text-align: center; }
+.profile-card img { 
+    width: 220px; 
+    height: 220px; 
+    border-radius: 50%; 
+    border: 5px solid var(--main-blue); 
+    object-fit: cover;
+}
+
+/* --- Education & Projects --- */
+.edu-cert, .projects { padding: 80px 10%; text-align: center; }
+
 .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 50px; }
 .glass-card {
     background: var(--glass);
@@ -78,82 +103,39 @@ nav ul li a { color: white; text-decoration: none; font-weight: 500; }
     border: 1px solid rgba(255,255,255,0.1);
     transition: 0.3s;
 }
-.glass-card i { font-size: 2.5rem; color: var(--main-blue); margin-bottom: 20px; }
 .glass-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.08); }
 
-/* Projects */
-.projects { padding: 100px 10%; }
 .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-.project-card { background: #161b22; border-radius: 15px; overflow: hidden; }
-.p-img { height: 200px; background: #30363d; }
-.p-content { padding: 20px; }
-.p-content a { color: var(--main-blue); text-decoration: none; margin-top: 10px; display: block; }
+.project-card { background: #161b22; border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+.project-card:hover { transform: scale(1.02); }
+.p-img { height: 200px; background: #30363d; overflow: hidden; }
+.p-content { padding: 20px; text-align: left; }
+.p-content h3 { margin-bottom: 10px; }
+.p-content a { color: var(--main-blue); text-decoration: none; font-weight: bold; display: inline-block; margin-top: 10px; }
 
-/* Contact Section */
-.contact { padding: 100px 10%; text-align: center; }
-.contact-box { background: linear-gradient(145deg, #1e293b, #0f172a); padding: 60px; border-radius: 40px; }
+/* --- Contact Section --- */
+.contact-box { background: linear-gradient(145deg, #1e293b, #0f172a); padding: 60px 40px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.05); }
+
 .social-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 30px; }
-.social-links a { padding: 10px 25px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; font-size: 0.9rem; transition: 0.3s; }
+.social-links a { padding: 12px 25px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
 
-/* Social Colors */
-.upwork { background: #14a800; }
 .linkedin { background: #0077b5; }
 .github { background: #333; }
 .whatsapp { background: #25d366; }
-.indeed { background: #2164f3; }
+.upwork { background: #14a800; }
 
-.mini-socials { margin-top: 30px; font-size: 1.5rem; }
-.mini-socials a { color: white; margin: 0 15px; transition: 0.3s; }
-.mini-socials a:hover { color: var(--main-blue); }
+footer { padding: 40px; text-align: center; color: #666; font-size: 0.9rem; }
 
-footer { padding: 40px; text-align: center; color: #666; }
-
+/* --- Responsive Fixes --- */
 @media (max-width: 768px) {
-    .hero { flex-direction: column; text-align: center; padding-top: 150px; }
+    nav { padding: 15px 5%; }
+    nav ul { display: none; } /* Hide menu on mobile for cleaner look */
+    
+    .hero { flex-direction: column; text-align: center; padding-top: 60px; height: auto; padding-bottom: 50px;}
+    .hero-content h1 { font-size: 2.8rem; }
+    .hero-btns { display: flex; flex-direction: column; gap: 10px; }
+    .secondary { margin-left: 0; }
+    
     .grid-container { grid-template-columns: 1fr; }
-    .hero-content h1 { font-size: 2.5rem; }
-}
-/* --- Ultra Responsive Media Queries --- */
-
-@media (max-width: 992px) {
-    .hero-content h1 { font-size: 3.5rem; }
-    .project-grid { grid-template-columns: 1fr; } /* Desktop par 2 cards, tablet par 1 */
-}
-
-@media (max-width: 768px) {
-    nav { 
-        padding: 15px 5%; 
-        border-radius: 20px; 
-        top: 10px; 
-    }
-    
-    nav ul { display: none; } /* Mobile menu simple rakhne ke liye filhal hide */
-
-    .hero { 
-        flex-direction: column; 
-        text-align: center; 
-        padding-top: 140px; 
-        height: auto; 
-    }
-
-    .hero-content h1 { font-size: 2.8rem; letter-spacing: -1px; }
-    
-    .hero-content p { font-size: 1rem; margin: 0 auto; }
-
-    .hero-btns {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        align-items: center;
-    }
-
-    .secondary { margin-left: 0; width: 100%; }
-    .primary { width: 100%; }
-
-    .profile-card img { width: 150px; height: 150px; }
-
-    .contact-box { padding: 40px 20px; border-radius: 30px; }
-    
-    .social-links { gap: 10px; }
-    .social-links a { width: 100%; text-align: center; }
+    .profile-card img { width: 180px; height: 180px; }
 }
